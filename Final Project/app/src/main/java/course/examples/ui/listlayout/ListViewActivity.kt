@@ -1,11 +1,8 @@
 package course.examples.ui.listlayout
 
 import android.os.Bundle
+import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 
 class ListViewActivity : FragmentActivity() {
@@ -15,6 +12,8 @@ class ListViewActivity : FragmentActivity() {
         setContentView(R.layout.layout)
 
         val listView = findViewById<ListView>(R.id.list)
+        val searchBar = findViewById<EditText>(R.id.search)
+        val searchButton = findViewById<Button>(R.id.button)
         // Create a new Adapter containing a list of colors
         // Set the adapter on this ListActivity's built-in ListView
         val hobbyArray = arrayOf("Running", "Walking", "Cooking", "Baking", "Knitting",
@@ -36,6 +35,13 @@ class ListViewActivity : FragmentActivity() {
             Toast.makeText(
                 applicationContext,
                 (view as TextView).text, Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        searchButton.setOnClickListener {
+            Toast.makeText(
+                    applicationContext,
+                    searchBar.text, Toast.LENGTH_SHORT
             ).show()
         }
     }
