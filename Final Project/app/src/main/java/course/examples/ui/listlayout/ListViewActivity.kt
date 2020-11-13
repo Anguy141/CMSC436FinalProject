@@ -7,25 +7,40 @@ import android.widget.AdapterView.OnItemClickListener
 import androidx.fragment.app.FragmentActivity
 
 class ListViewActivity : FragmentActivity() {
+
+    // Used by WikiHowSearchTask.kt //
+    private lateinit var mWikiSearch : WikiHowSearchTask
+    private lateinit var mWikiToast : Toast
+    private var mWikiDataMap = mutableMapOf<String, String>()
+    ///////////////////////////////////////////////
+
+    private lateinit var listView : ListView
+    private lateinit var hobbyArrayList : ArrayList<String>
+    private lateinit var searchBar : EditText
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.layout)
 
-        val listView = findViewById<ListView>(R.id.list)
-        val searchBar = findViewById<EditText>(R.id.search)
+        listView = findViewById<ListView>(R.id.list)
+        searchBar = findViewById<EditText>(R.id.search)
         val searchButton = findViewById<Button>(R.id.button)
 
         // Create a new Adapter containing a list of hobbies
         // Set the adapter on this ListActivity's built-in ListView
-        val hobbyArray = resources.getStringArray(R.array.hobby)
-        hobbyArray.sort()
+        hobbyArrayList = resources.getStringArray(R.array.hobby).toCollection(ArrayList<String>())
+        hobbyArrayList.sort()
 
         listView.adapter = ArrayAdapter(
             this,
             R.layout.list_item,
-            hobbyArray
+            hobbyArrayList
         )
+
+        // Used by WikiHowSearchTask.kt //
+        mWikiToast = Toast.makeText(applicationContext, "Searching...", Toast.LENGTH_SHORT)
+        ///////////////////////////////////////////////
 
         // Set a setOnItemClickListener on the ListView
         listView.onItemClickListener = OnItemClickListener { _ , _, pos, _ ->
@@ -36,7 +51,11 @@ class ListViewActivity : FragmentActivity() {
 
         // Set a setOnItemClickListener on the the button for parsing and web searching
         searchButton.setOnClickListener {
-
+            mWikiToast!!.setText("Searching...")
+            mWikiToast.show()
+            mWikiSearch = WikiHowSearchTask(applicationContext)
+            mWikiSearch.setListViewActivityVariables(mWikiDataMap, listView, hobbyArrayList, mWikiToast, searchBar.text.toString())
+            mWikiSearch.start()
         }
     }
 }
