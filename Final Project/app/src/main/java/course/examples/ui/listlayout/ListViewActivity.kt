@@ -1,5 +1,6 @@
 package course.examples.ui.listlayout
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
@@ -14,35 +15,28 @@ class ListViewActivity : FragmentActivity() {
         val listView = findViewById<ListView>(R.id.list)
         val searchBar = findViewById<EditText>(R.id.search)
         val searchButton = findViewById<Button>(R.id.button)
-        // Create a new Adapter containing a list of colors
+
+        // Create a new Adapter containing a list of hobbies
         // Set the adapter on this ListActivity's built-in ListView
-        val hobbyArray = arrayOf("Running", "Walking", "Cooking", "Baking", "Knitting",
-                "Bird Watching", "Soccer", "Painting", "Basketball", "Wood Carving", "Coding",
-                "Sewing", "Singing", "Dancing")
+        val hobbyArray = resources.getStringArray(R.array.hobby)
         hobbyArray.sort()
 
         listView.adapter = ArrayAdapter(
-            this, R.layout.list_item,
-                hobbyArray
+            this,
+            R.layout.list_item,
+            hobbyArray
         )
 
-        // Enable filtering when the user types in the virtual keyboard
-        listView.isTextFilterEnabled = true
-
         // Set a setOnItemClickListener on the ListView
-        listView.onItemClickListener = OnItemClickListener { _, view, _, _ ->
-            // Display a Toast message indicting the selected item
-            Toast.makeText(
-                applicationContext,
-                (view as TextView).text, Toast.LENGTH_SHORT
-            ).show()
+        listView.onItemClickListener = OnItemClickListener { _ , _, pos, _ ->
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("hobby", listView.getItemIdAtPosition(pos))
+            startActivity(intent)
         }
 
+        // Set a setOnItemClickListener on the the button for parsing and web searching
         searchButton.setOnClickListener {
-            Toast.makeText(
-                    applicationContext,
-                    searchBar.text, Toast.LENGTH_SHORT
-            ).show()
+
         }
     }
 }

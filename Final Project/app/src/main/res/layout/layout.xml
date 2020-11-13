@@ -4,10 +4,12 @@
     android:layout_height="match_parent">
 
         <EditText
+            android:id="@+id/search"
             android:layout_width="325dp"
             android:layout_height="60dp"
-            android:id="@+id/search"
-            android:text="Search for more hobbies">
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:hint="@string/search_for_more_hobbies">
         </EditText>
 
         <ListView
@@ -19,12 +21,12 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/search"
+            android:layout_width="5dp"
+            android:layout_height="60dp"
+            android:layout_toEndOf="@id/search"
             android:layout_above="@id/list"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:text="search" />
+            android:text="@string/search" />
 
 </RelativeLayout>
