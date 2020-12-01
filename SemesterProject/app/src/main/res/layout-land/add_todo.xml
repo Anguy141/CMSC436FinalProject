@@ -5,6 +5,11 @@
 
     <!-- Title -->
 
+    <View android:id="@+id/fakeView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
     <TextView
         android:id="@+id/TitleLabel"
         android:layout_width="wrap_content"
@@ -18,9 +23,10 @@
 
     <EditText
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TitleLabel"
+        android:layout_alignEnd="@id/fakeView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
@@ -45,9 +51,10 @@
 
     <EditText
         android:id="@+id/Description"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/DescriptionLabel"
+        android:layout_alignEnd="@id/fakeView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
@@ -70,10 +77,11 @@
 
     <EditText
         android:id="@+id/goalEdit"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@id/fakeView"
         android:layout_below="@id/goal"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
         android:ems="10"
@@ -96,10 +104,11 @@
 
     <EditText
         android:id="@+id/Message"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@id/congratulation"
+        android:layout_alignEnd="@id/fakeView"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
         android:ems="10"
@@ -114,24 +123,30 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="3dp"
         android:text="@string/cancel_string" />
 
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/reset_string" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="3dp"
         android:text="@string/submit_string" />
 
 </RelativeLayout>

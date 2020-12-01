@@ -94,6 +94,7 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
             viewHolder.mDescriptionView!!.text = currItem.description
             viewHolder.mProgressView!!.text = mContext.getString(R.string.Progress_string,
                     count,currItem.goal)
+            Log.i(TAG, "count = $count")
         }
 
         /////////// onClick for increment button ////////////
@@ -108,10 +109,12 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
                 viewHolder.mProgressView!!.text = ""
                 viewHolder.mCongratulationView!!.text = mContext.getString(R.string.finished_string,
                 currItem.message)
+                Log.i(TAG, "Congratulation Message Displayed")
             } else {
                 viewHolder.mProgressView!!.text = mContext.getString(R.string.Progress_string,
                         count,currItem.goal)
             }
+            Log.i(TAG, "count = $count")
         }
 
         /////////// onClick for delete button ////////////

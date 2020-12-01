@@ -1,6 +1,7 @@
 package course.labs.todomanager
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -49,16 +50,30 @@ class AddToDoActivity : Activity() {
         val submitButton = findViewById<View>(R.id.submitButton) as Button
         submitButton.setOnClickListener {
             Log.i(TAG, "Entered submitButton.OnClickListener.onClick()")
-
-            val intent = Intent()
-            intent.putExtra(ToDoItem.HOBBY, mTitleText!!.text.toString())
-            intent.putExtra(ToDoItem.DESCRIPTION, mDescriptionText!!.text.toString())
-            intent.putExtra(ToDoItem.GOAL, mGoalText!!.text.toString())
-            intent.putExtra(ToDoItem.MESSAGE, mMessageText!!.text.toString())
-            intent.putExtra(ToDoItem.COUNT, "0")
-            setResult(RESULT_OK,intent)
-            finish()
+            if (mTitleText!!.text.isNotEmpty() && mDescriptionText!!.text.isNotEmpty()
+                    && mGoalText!!.text.isNotEmpty() && mMessageText!!.text.isNotEmpty()){
+                val intent = Intent()
+                intent.putExtra(ToDoItem.HOBBY, mTitleText!!.text.toString())
+                intent.putExtra(ToDoItem.DESCRIPTION, mDescriptionText!!.text.toString())
+                intent.putExtra(ToDoItem.GOAL, mGoalText!!.text.toString())
+                intent.putExtra(ToDoItem.MESSAGE, mMessageText!!.text.toString())
+                intent.putExtra(ToDoItem.COUNT, "0")
+                setResult(RESULT_OK, intent)
+                finish()
+            } else {
+                openDialog()
+            }
         }
+    }
+
+    // opens the dialog using AlertDialog
+    private fun openDialog(){
+        AlertDialog.Builder(this)
+                .setTitle(R.string.dialog_title)
+                .setMessage(R.string.dialog_string)
+                .setCancelable(true)
+                .create()
+                .show()
     }
 
     companion object {
