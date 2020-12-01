@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_marginTop="17dp"
+        android:textSize="25sp"
+        android:textColor="#000000"
         android:layout_below="@+id/DescriptionView" >
     </TextView>
 
@@ -71,6 +73,8 @@
         android:id="@+id/congratulationMessage"
         android:layout_width="match_parent"
         android:layout_height="117dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 

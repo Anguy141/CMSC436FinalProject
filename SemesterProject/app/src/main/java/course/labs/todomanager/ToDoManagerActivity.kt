@@ -19,6 +19,7 @@ class ToDoManagerActivity : ListActivity() {
     internal lateinit var mAdapter: ToDoListAdapter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "Entered onCreate()")
         super.onCreate(savedInstanceState)
 
         mAdapter = ToDoListAdapter(applicationContext)
@@ -124,7 +125,7 @@ class ToDoManagerActivity : ListActivity() {
                 message = reader.readLine()
                 count = reader.readLine()
                 mAdapter.add(ToDoItem(hobby, descriptor,
-                        goal, message,count))
+                        goal, message, count))
 
             }
             while (true)

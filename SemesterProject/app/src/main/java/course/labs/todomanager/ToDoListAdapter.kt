@@ -5,6 +5,7 @@ import java.util.ArrayList
 
 import android.content.Context
 import android.provider.Settings.Global.getString
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -62,6 +63,7 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+        Log.i(TAG, "Entered getView")
 
         val currItem: ToDoItem = getItem(position) as ToDoItem
         val viewHolder = ViewHolder()
@@ -83,8 +85,10 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
         /////////// onClick for reset button ////////////
         viewHolder.mResetButton.setOnClickListener {
+            Log.i(TAG, "Entered mResetButton.OnClickListener.onClick()")
             count = 0
             currItem.count = count.toString()
+            /////////// displays all messages ////////////
             viewHolder.mCongratulationView!!.text = ""
             viewHolder.mTitleView!!.text = currItem.hobby
             viewHolder.mDescriptionView!!.text = currItem.description
@@ -94,8 +98,10 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
         /////////// onClick for increment button ////////////
         viewHolder.mIncrementButton.setOnClickListener {
+            Log.i(TAG, "Entered mIncrementButton.OnClickListener.onClick()")
             count += 1
             currItem.count = count.toString()
+            /////////// displays congratulation message ////////////
             if (count >= (currItem.goal).toInt()) {
                 viewHolder.mTitleView!!.text = ""
                 viewHolder.mDescriptionView!!.text = ""
@@ -110,12 +116,14 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
         /////////// onClick for delete button ////////////
         viewHolder.mDeleteButton.setOnClickListener {
+            Log.i(TAG, "Entered mDeleteButton.OnClickListener.onClick()")
             mItems.removeAt(position)
             notifyDataSetChanged()
         }
 
         /////////// sets the text views ////////////
         if (count >= (currItem.goal).toInt()) {
+            /////////// displays congratulation message ////////////
             viewHolder.mTitleView!!.text = ""
             viewHolder.mDescriptionView!!.text = ""
             viewHolder.mProgressView!!.text = ""
@@ -144,4 +152,7 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
         lateinit var mDeleteButton:Button
     }
 
+    companion object {
+        private val TAG = "FinalProject"
+    }
 }

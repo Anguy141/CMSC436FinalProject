@@ -50,6 +50,5 @@ class ToDoItem {
         val GOAL = "goal"
         val COUNT = "count"
 
-
     }
 }
