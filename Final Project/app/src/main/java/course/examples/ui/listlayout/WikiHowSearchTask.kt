@@ -19,18 +19,21 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
     private val hrefRegex = Regex("""<a class="result_link" href=(https://www.wikihow.com/.*) >""")
 
     // Variables in ListViewActivity //
-    private var mWikiDataMap : MutableMap<String, String>? = null
-    private var listView : ListView? = null
+    private var mWikiDataMap : HashMap<String, String>? = null
+    private var hobbyListView : ListView? = null
     private var hobbyArrayList : ArrayList<String>? = null
     private var mWikiToast : Toast? = null
     ///////////////////////////////////
 
+    // Map local to this class that will eventually be used to update mWikiDataMap in the Main Thread
+    private var localMap : HashMap<String, String> = hashMapOf<String, String>()
+
     private var searchQuery : String? = null
 
-    internal fun setListViewActivityVariables(mWikiDataMapIn : MutableMap<String, String>?, listViewIn : ListView,
+    internal fun setListViewActivityVariables(mWikiDataMapIn : HashMap<String, String>?, hobbyListViewIn : ListView,
                                               hobbyArrayListIn : ArrayList<String>, mWikiToastIn : Toast?, searchQueryIn : String) : WikiHowSearchTask {
         this.mWikiDataMap = mWikiDataMapIn
-        this.listView = listViewIn
+        this.hobbyListView = hobbyListViewIn
         this.hobbyArrayList = hobbyArrayListIn
         this.mWikiToast = mWikiToastIn
         this.searchQuery = searchQueryIn
@@ -39,7 +42,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
 
 
     override fun run() {
-        if ( mWikiDataMap == null || listView == null || hobbyArrayList == null || mWikiToast == null || searchQuery == null ) return
+        if ( mWikiDataMap == null || hobbyListView == null || hobbyArrayList == null || mWikiToast == null || searchQuery == null ) return
 
         rawHtml = httpRequestData("https://www.wikihow.com/wikiHowTo?search=$searchQuery")
 
@@ -58,7 +61,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
             var currentTitle : String? = null
             var currentHref : String? = null
 
-            mWikiDataMap!!.clear()
+            localMap.clear()
 
             for (i in titleList.indices) {
 
@@ -75,20 +78,22 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
                 if ( currentTitle != null && currentHref != null && currentTitle.contains("How to ") && currentHref.contains("/")) {
 
                     val parsedTitle = currentTitle.substring("How to ".length)
-                    val parsedHref = currentHref.substring(currentHref.lastIndexOf("/") + 1).replace("-", " ")
+                    val parsedHref = currentHref.substring(currentHref.lastIndexOf("/") + 1).replace("-", " ").replace("%28", "(").replace("%29", ")")
 
                     // This block checks that the title matches the href
                     if ( parsedTitle == parsedHref ) {
-                        mHandler.post { mWikiDataMap!!.put(currentTitle, currentHref)}
+                        localMap.put(currentTitle, currentHref)
                     }
                 }
 
             }
 
             mHandler.post {
+                mWikiDataMap!!.clear()
+                mWikiDataMap!!.putAll(localMap)
                 hobbyArrayList!!.clear()
                 hobbyArrayList!!.addAll(ArrayList(mWikiDataMap!!.keys))
-                (listView!!.adapter as ArrayAdapter<String>).notifyDataSetChanged()
+                (hobbyListView!!.adapter as ArrayAdapter<String>).notifyDataSetChanged()
             }
 
         }
