@@ -8,12 +8,15 @@ class ToDoItem {
     var description = String()
     var message = String()
     var goal = String()
+    var count = String()
 
-    internal constructor(hobby: String, description: String, goal: String, message: String) {
+    internal constructor(hobby: String, description: String, goal: String, message: String, count:
+        String) {
         this.hobby = hobby
         this.description = description
         this.goal = goal
         this.message = message
+        this.count = count
     }
 
     internal constructor(intent: Intent) {
@@ -22,18 +25,19 @@ class ToDoItem {
         description = intent.getStringExtra(ToDoItem.DESCRIPTION)
         goal = intent.getStringExtra(ToDoItem.GOAL)
         message = intent.getStringExtra(ToDoItem.MESSAGE)
+        count = intent.getStringExtra(ToDoItem.COUNT)
 
     }
 
     override fun toString(): String {
         return (hobby + ITEM_SEP + description + ITEM_SEP + goal + ITEM_SEP
-                + message)
+                + message + ITEM_SEP + count)
     }
 
     fun toLog(): String {
         return ("hobby:" + hobby + ITEM_SEP + "description:" + description
                 + ITEM_SEP + "message:" + message + ITEM_SEP + "goal:"
-                + goal + "\n")
+                + goal + ITEM_SEP + "count:" + count + "\n")
     }
 
     companion object {
@@ -44,15 +48,8 @@ class ToDoItem {
         val DESCRIPTION = "description"
         val MESSAGE = "message"
         val GOAL = "goal"
+        val COUNT = "count"
 
-        fun packageIntent(intent: Intent, hobby: String,
-                          description: String, message: String, goal: Int) {
 
-            intent.putExtra(ToDoItem.HOBBY, hobby)
-            intent.putExtra(ToDoItem.DESCRIPTION, description)
-            intent.putExtra(ToDoItem.GOAL, goal)
-            intent.putExtra(ToDoItem.MESSAGE, message)
-
-        }
     }
 }

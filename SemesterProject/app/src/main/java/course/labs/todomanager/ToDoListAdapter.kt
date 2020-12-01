@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import java.util.ArrayList
 
 import android.content.Context
+import android.provider.Settings.Global.getString
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,44 +63,70 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
 
-        val currItem = getItem(position) as ToDoItem
-        val viewHolder: ViewHolder = ViewHolder()
-        var count: Int = 0
+        val currItem: ToDoItem = getItem(position) as ToDoItem
+        val viewHolder = ViewHolder()
+        var count = currItem.count.toInt()
 
-        val view = LayoutInflater.from(parent.context)
+        val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.todo_item, parent, false)
 
+        /////////// Initialize the Views and Buttons ////////////
         viewHolder.mTitleView=view.titleView
         viewHolder.mDescriptionView=view.DescriptionView
         viewHolder.mProgressView=view.ProgressView
+        viewHolder.mCongratulationView=view.congratulationMessage
         viewHolder.mItemLayout=view.RelativeLayout1
 
-        view.findViewById<Button>(R.id.resetButton).setOnClickListener (View.OnClickListener {
-            fun onClick(v: View){
-                count = 0
-            }
-        })
+        viewHolder.mResetButton = view.findViewById(R.id.Reset)
+        viewHolder.mIncrementButton = view.findViewById(R.id.Increment)
+        viewHolder.mDeleteButton = view.findViewById(R.id.Delete)
 
-        view.findViewById<Button>(R.id.Increment).setOnClickListener (View.OnClickListener {
-            fun onClick(v: View){
-                count += 1
-            }
-
-            if (count == (currItem.goal).toInt()){
-                AlertDialog.Builder(mContext)
-                        .setTitle(R.string.congratulation_title)
-                        .setMessage(currItem.message)
-                        .setCancelable(true)
-                        .create()
-                        .show()
-            }
-
+        /////////// onClick for reset button ////////////
+        viewHolder.mResetButton.setOnClickListener {
             count = 0
-        })
+            currItem.count = count.toString()
+            viewHolder.mCongratulationView!!.text = ""
+            viewHolder.mTitleView!!.text = currItem.hobby
+            viewHolder.mDescriptionView!!.text = currItem.description
+            viewHolder.mProgressView!!.text = mContext.getString(R.string.Progress_string,
+                    count,currItem.goal)
+        }
 
-        viewHolder.mTitleView!!.text = currItem.hobby
-        viewHolder.mDescriptionView!!.text = currItem.description
-        viewHolder.mProgressView!!.text = "${count}/${currItem.goal}"
+        /////////// onClick for increment button ////////////
+        viewHolder.mIncrementButton.setOnClickListener {
+            count += 1
+            currItem.count = count.toString()
+            if (count >= (currItem.goal).toInt()) {
+                viewHolder.mTitleView!!.text = ""
+                viewHolder.mDescriptionView!!.text = ""
+                viewHolder.mProgressView!!.text = ""
+                viewHolder.mCongratulationView!!.text = mContext.getString(R.string.finished_string,
+                currItem.message)
+            } else {
+                viewHolder.mProgressView!!.text = mContext.getString(R.string.Progress_string,
+                        count,currItem.goal)
+            }
+        }
+
+        /////////// onClick for delete button ////////////
+        viewHolder.mDeleteButton.setOnClickListener {
+            mItems.removeAt(position)
+            notifyDataSetChanged()
+        }
+
+        /////////// sets the text views ////////////
+        if (count >= (currItem.goal).toInt()) {
+            viewHolder.mTitleView!!.text = ""
+            viewHolder.mDescriptionView!!.text = ""
+            viewHolder.mProgressView!!.text = ""
+            viewHolder.mCongratulationView!!.text = mContext.getString(R.string.finished_string,
+                    currItem.message)
+        } else {
+            viewHolder.mTitleView!!.text = currItem.hobby
+            viewHolder.mDescriptionView!!.text = currItem.description
+            viewHolder.mProgressView!!.text = mContext.getString(R.string.Progress_string,
+                    count,currItem.goal)
+        }
 
         return viewHolder.mItemLayout
 
@@ -106,14 +134,14 @@ class ToDoListAdapter(private val mContext: Context) : BaseAdapter() {
 
 
     internal class ViewHolder {
-        var position: Int = 0
         var mItemLayout: RelativeLayout? = null
         var mTitleView: TextView? = null
         var mDescriptionView: TextView? = null
         var mProgressView: TextView? = null
+        var mCongratulationView: TextView? = null
+        lateinit var mResetButton:Button
+        lateinit var mIncrementButton:Button
+        lateinit var mDeleteButton:Button
     }
 
-    companion object {
-        private val TAG = "Lab-UserInterface"
-    }
 }

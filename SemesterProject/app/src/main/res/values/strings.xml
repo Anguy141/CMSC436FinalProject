@@ -15,6 +15,7 @@
     <string name="increment_string">Increment</string>
     <string name="submit_string">Submit</string>
     <string name="enter_title_string">Enter Hobby</string>
-    <string name="Progress_string">Progress</string>
-    <string name="congratulation_title">Congratulation!!</string>
+    <string name="Progress_string">You have done %1$d/%2$s of your goal!</string>
+    <string name="finished_string">%1$s! You have completed your habit/hobby! press the reset button
+        to do it again, or the delete button if you are done!</string>
 </resources>

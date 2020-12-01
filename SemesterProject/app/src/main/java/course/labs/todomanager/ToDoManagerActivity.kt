@@ -6,17 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ListView
-import kotlinx.android.synthetic.main.footer_view.*
 import java.io.*
 import java.text.ParseException
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ToDoManagerActivity : ListActivity() {
@@ -58,8 +53,6 @@ class ToDoManagerActivity : ListActivity() {
             }
         }
     }
-
-    // Do not modify below here
 
     public override fun onResume() {
         super.onResume()
@@ -120,17 +113,18 @@ class ToDoManagerActivity : ListActivity() {
             var descriptor: String? = null
             var goal: String? = null
             var message: String? = null
+            var count: String? = null
 
             do {
-                title = reader.readLine();
-                if (title == null)
+                hobby = reader.readLine();
+                if (hobby == null)
                     break
-                hobby = reader.readLine()
                 descriptor = reader.readLine()
                 goal = reader.readLine()
                 message = reader.readLine()
+                count = reader.readLine()
                 mAdapter.add(ToDoItem(hobby, descriptor,
-                        goal, message))
+                        goal, message,count))
 
             }
             while (true)
@@ -178,7 +172,7 @@ class ToDoManagerActivity : ListActivity() {
 
         private val ADD_TODO_ITEM_REQUEST = 0
         private val FILE_NAME = "TodoManagerActivityData.txt"
-        private val TAG = "Lab-UserInterface"
+        private val TAG = "Final Project"
 
         // IDs for menu items
         private val MENU_DELETE = Menu.FIRST

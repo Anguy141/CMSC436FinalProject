@@ -55,6 +55,7 @@ class AddToDoActivity : Activity() {
             intent.putExtra(ToDoItem.DESCRIPTION, itemDescription)
             intent.putExtra(ToDoItem.GOAL, itemGoal)
             intent.putExtra(ToDoItem.MESSAGE, itemMessage)
+            intent.putExtra(ToDoItem.COUNT, "0")
             setResult(RESULT_OK,intent)
 
             finish()
