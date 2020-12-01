@@ -20,12 +20,6 @@
         <item>Sewing</item>
         <item>Singing</item>
         <item>Dancing</item>
-        <item>navy</item>
-        <item>olive</item>
-        <item>purple</item>
-        <item>silver</item>
-        <item>teal</item>
-        <item>white</item>
     </string-array>
     <string name="title_activity_second">ScrollingActivity</string>
     <string name="large_text">

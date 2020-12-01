@@ -45,7 +45,7 @@ class ListViewActivity : FragmentActivity() {
         // Set a setOnItemClickListener on the ListView
         listView.onItemClickListener = OnItemClickListener { _ , _, pos, _ ->
             val intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra("hobby", listView.getItemIdAtPosition(pos))
+            intent.putExtra("hobby", listView.getItemAtPosition(pos).toString())
             startActivity(intent)
         }
 
