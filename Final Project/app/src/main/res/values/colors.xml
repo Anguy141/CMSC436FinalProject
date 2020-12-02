@@ -9,4 +9,5 @@
     <color name="secondary_text">#757575</color>
     <color name="icons" tools:keep="@color/icons">#FFFFFF</color>
     <color name="divider" tools:keep="@color/divider">#BDBDBD</color>
+
 </resources>

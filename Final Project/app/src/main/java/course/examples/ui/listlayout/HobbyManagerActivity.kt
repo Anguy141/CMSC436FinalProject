@@ -97,6 +97,7 @@ class HobbyManagerActivity : ListActivity() {
             var goal: String? = null
             var message: String? = null
             var count: String? = null
+            var color: String? = null
 
             do {
                 hobby = reader.readLine();
@@ -106,8 +107,9 @@ class HobbyManagerActivity : ListActivity() {
                 goal = reader.readLine()
                 message = reader.readLine()
                 count = reader.readLine()
+                color = reader.readLine()
                 mAdapter.add(HobbyItem(hobby, descriptor,
-                        goal, message, count))
+                        goal, message, count, color))
 
             }
             while (true)

@@ -8,14 +8,16 @@ class HobbyItem {
     var message = String()
     var goal = String()
     var count = String()
+    var color = String()
 
     internal constructor(hobby: String, description: String, goal: String, message: String, count:
-    String) {
+    String, color: String) {
         this.hobby = hobby
         this.description = description
         this.goal = goal
         this.message = message
         this.count = count
+        this.color = color
     }
 
     internal constructor(intent: Intent) {
@@ -25,18 +27,19 @@ class HobbyItem {
         goal = intent.getStringExtra(HobbyItem.GOAL).toString()
         message = intent.getStringExtra(HobbyItem.MESSAGE).toString()
         count = intent.getStringExtra(HobbyItem.COUNT).toString()
+        color = intent.getStringExtra(HobbyItem.COLOR).toString()
 
     }
 
     override fun toString(): String {
         return (hobby + ITEM_SEP + description + ITEM_SEP + goal + ITEM_SEP
-                + message + ITEM_SEP + count)
+                + message + ITEM_SEP + count + ITEM_SEP + color)
     }
 
     fun toLog(): String {
         return ("hobby:" + hobby + ITEM_SEP + "description:" + description
                 + ITEM_SEP + "message:" + message + ITEM_SEP + "goal:"
-                + goal + ITEM_SEP + "count:" + count + "\n")
+                + goal + ITEM_SEP + "count:" + count + "color:" + color +"\n")
     }
 
     companion object {
@@ -48,6 +51,7 @@ class HobbyItem {
         val MESSAGE = "message"
         val GOAL = "goal"
         val COUNT = "count"
+        val COLOR = "color"
 
     }
 }

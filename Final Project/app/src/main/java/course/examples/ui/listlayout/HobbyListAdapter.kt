@@ -1,9 +1,11 @@
 package course.examples.ui.listlayout
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import java.util.ArrayList
 
 import android.content.Context
+import android.graphics.Color
 import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.Gravity
@@ -61,6 +63,7 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
         Log.i(TAG, "Entered getView")
 
@@ -81,6 +84,17 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
         viewHolder.mResetButton = view.findViewById(R.id.Reset)
         viewHolder.mIncrementButton = view.findViewById(R.id.Increment)
         viewHolder.mDeleteButton = view.findViewById(R.id.Delete)
+
+        /////////// sets color of view background ////////////
+        when (currItem.color){
+            "white" -> view.setBackgroundColor(Color.parseColor("#ffffff"))
+            "red" -> view.setBackgroundColor(Color.parseColor("#FF0000"))
+            "orange" -> view.setBackgroundColor(Color.parseColor("#FF7200"))
+            "yellow" -> view.setBackgroundColor(Color.parseColor("#FBFF00"))
+            "green" -> view.setBackgroundColor(Color.parseColor("#04FF00"))
+            "blue" -> view.setBackgroundColor(Color.parseColor("#002BFF"))
+            else -> view.setBackgroundColor(Color.parseColor("#ffffff"))
+        }
 
         /////////// onClick for reset button ////////////
         viewHolder.mResetButton.setOnClickListener {

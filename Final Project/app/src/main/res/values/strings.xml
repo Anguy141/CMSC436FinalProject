@@ -3,6 +3,7 @@
 
     <string name="app_name">Habit Or Hobby Searcher</string>
     <string name="search">search</string>
+    <string name="pick_color">Pick a color for habit/hobby(default is white)</string>
     <string name="add_hobby">Add a new habit/hobby</string>
     <string name="homescreen">Pick to track or discover habit/hobby</string>
     <string name="search_for_more_hobbies">Search for more hobbies</string>
@@ -30,5 +31,13 @@
     <string name="Progress_string">You have done %1$d/%2$s of your goal!</string>
     <string name="finished_string">%1$s! You have completed your habit/hobby! press the reset button
         to do it again, or the delete button if you are done!</string>
+    <string-array name="colors">
+        <item>white</item>
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>blue</item>
+    </string-array>
 
 </resources>

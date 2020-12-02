@@ -5,8 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
+import kotlinx.android.synthetic.main.add_hobby.*
 
 class AddHobbyActivity : Activity(){
     /////////// EditText Views ////////////
@@ -41,6 +41,7 @@ class AddHobbyActivity : Activity(){
             mDescriptionText!!.setText("")
             mGoalText!!.setText("")
             mMessageText!!.setText("")
+            spinner!!.setSelection(0)
         }
 
         /////////// onClick for submit buttons, makes intent and send intent ////////////
@@ -55,10 +56,49 @@ class AddHobbyActivity : Activity(){
                 intent.putExtra(HobbyItem.GOAL, mGoalText!!.text.toString())
                 intent.putExtra(HobbyItem.MESSAGE, mMessageText!!.text.toString())
                 intent.putExtra(HobbyItem.COUNT, "0")
+                intent.putExtra(HobbyItem.COLOR,spinner.selectedItem.toString())
                 setResult(RESULT_OK, intent)
                 finish()
             } else {
                 openDialog()
+            }
+        }
+
+        // Indicates whether spinner was touched by user
+        wasTouched = false
+
+        // Get a reference to the Spinner
+        val spinner = findViewById<Spinner>(R.id.spinner)
+
+        // Create an Adapter that holds a list of colors
+        val adapter = ArrayAdapter.createFromResource(
+                this, R.array.colors, R.layout.color_picker
+        )
+
+        // Set the Adapter for the spinner
+        spinner.adapter = adapter
+
+        // Set an onTouchListener on the spinner because
+        // onItemSelected() can be called multiple times by framework
+        spinner.setOnTouchListener { v: View, _ ->
+            wasTouched = true
+            v.performClick()
+            false
+        }
+
+        // Set an onItemSelectedListener on the spinner
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                    parent: AdapterView<*>, view: View,
+                    pos: Int, id: Long
+            ) {
+
+                if (wasTouched) {
+                    wasTouched = false
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
     }
@@ -75,5 +115,6 @@ class AddHobbyActivity : Activity(){
 
     companion object {
         private val TAG = "FinalProject"
+        private var wasTouched: Boolean = false
     }
 }
