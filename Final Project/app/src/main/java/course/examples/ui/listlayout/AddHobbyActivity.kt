@@ -1,5 +1,4 @@
 package course.examples.ui.listlayout
-import android.R.layout
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -30,7 +29,6 @@ class AddHobbyActivity : Activity(){
         val cancelButton = findViewById<View>(R.id.cancelButton) as Button
         cancelButton.setOnClickListener {
             Log.i(TAG, "Entered cancelButton.OnClickListener.onClick()")
-
             finish()
         }
 

@@ -1,6 +1,5 @@
 package course.examples.ui.listlayout
 
-//import android.R
 import android.app.ListActivity
 import android.content.Context
 import android.content.Intent
@@ -10,8 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import java.io.*
 import java.text.ParseException
-import java.util.*
-import kotlin.collections.ArrayList
 
 class HobbyManagerActivity : ListActivity() {
     internal lateinit var mAdapter: HobbyListAdapter
@@ -34,7 +31,7 @@ class HobbyManagerActivity : ListActivity() {
                     this,
                     AddHobbyActivity::class.java
             )
-            startActivityForResult(addToDoActivityIntent, ADD_TODO_ITEM_REQUEST)
+            startActivityForResult(addToDoActivityIntent, ADD_HOBBY_ITEM_REQUEST)
         }
 
         listView.adapter = mAdapter
@@ -44,7 +41,7 @@ class HobbyManagerActivity : ListActivity() {
 
         Log.i(TAG, "Entered onActivityResult()")
 
-        if (resultCode == RESULT_OK && requestCode == ADD_TODO_ITEM_REQUEST){
+        if (resultCode == RESULT_OK && requestCode == ADD_HOBBY_ITEM_REQUEST){
             val newItem = data?.let { HobbyItem(it) }
             if (newItem != null) {
                 Log.i(TAG, newItem.toLog())
@@ -56,7 +53,7 @@ class HobbyManagerActivity : ListActivity() {
     public override fun onResume() {
         super.onResume()
 
-        // Load saved ToDoItems, if necessary
+        // Load saved HobbyItems, if necessary
 
         if (mAdapter.count == 0)
             loadItems()
@@ -65,7 +62,7 @@ class HobbyManagerActivity : ListActivity() {
     override fun onPause() {
         super.onPause()
 
-        // Save ToDoItems
+        // Save HobbyItems
 
         saveItems()
 
@@ -73,35 +70,22 @@ class HobbyManagerActivity : ListActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
-
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete all")
-        menu.add(Menu.NONE, MENU_DUMP, Menu.NONE, "Dump to log")
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             MENU_DELETE -> {
                 mAdapter.clear()
-                return true
+                true
             }
-            MENU_DUMP -> {
-                dump()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
-    fun dump() {
-        for (i in 0 until mAdapter.count) {
-            val data = (mAdapter.getItem(i) as HobbyItem).toLog()
-            Log.i(TAG,
-                    "Item " + i + ": " + data.replace(HobbyItem.ITEM_SEP, ","))
-        }
-    }
 
-    // Load stored ToDoItems
+    // Load stored HobbyItems
     private fun loadItems() {
         var reader: BufferedReader? = null
         try {
@@ -146,7 +130,7 @@ class HobbyManagerActivity : ListActivity() {
         }
     }
 
-    // Save ToDoItems to file
+    // Save HobbyItems to file
     private fun saveItems() {
         var writer: PrintWriter? = null
         try {
@@ -166,15 +150,13 @@ class HobbyManagerActivity : ListActivity() {
         }
     }
 
-
     companion object {
 
-        private val ADD_TODO_ITEM_REQUEST = 0
-        private val FILE_NAME = "TodoManagerActivityData.txt"
+        private val ADD_HOBBY_ITEM_REQUEST = 0
+        private val FILE_NAME = "HobbyManagerActivityData.txt"
         private val TAG = "Final Project"
 
         // IDs for menu items
         private val MENU_DELETE = Menu.FIRST
-        private val MENU_DUMP = Menu.FIRST + 1
     }
 }
