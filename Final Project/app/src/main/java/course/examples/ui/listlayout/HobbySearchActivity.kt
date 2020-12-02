@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -81,5 +83,31 @@ class HobbySearchActivity : Activity() {
     fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(searchBar.windowToken, 0);
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menu.add(Menu.NONE, HobbySearchActivity.MENU_SWITCH, Menu.NONE, "Switch to hobby tracker")
+        return true
+    }
+
+    /////////// option menu to switch to tracker ////////////
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            HobbySearchActivity.MENU_SWITCH -> {
+                val searcherIntent = Intent(
+                        this,
+                        HobbyManagerActivity::class.java
+                )
+                startActivity(searcherIntent)
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        private val MENU_SWITCH = Menu.FIRST
     }
 }

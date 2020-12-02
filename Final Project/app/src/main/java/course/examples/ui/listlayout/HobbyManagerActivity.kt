@@ -68,9 +68,11 @@ class HobbyManagerActivity : ListActivity() {
 
     }
 
+    /////////// option menu to switch to finder and delete ////////////
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
         menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete all")
+        menu.add(Menu.NONE, MENU_SWITCH, Menu.NONE, "Switch to hobby finder")
         return true
     }
 
@@ -80,6 +82,15 @@ class HobbyManagerActivity : ListActivity() {
                 mAdapter.clear()
                 true
             }
+            MENU_SWITCH -> {
+                val searcherIntent = Intent(
+                        this,
+                        HobbySearchActivity::class.java
+                )
+                startActivity(searcherIntent)
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -160,5 +171,6 @@ class HobbyManagerActivity : ListActivity() {
 
         // IDs for menu items
         private val MENU_DELETE = Menu.FIRST
+        private val MENU_SWITCH = Menu.FIRST+1
     }
 }
