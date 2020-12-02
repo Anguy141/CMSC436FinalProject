@@ -14,6 +14,7 @@ class AddHobbyActivity : Activity(){
     private var mDescriptionText: EditText? = null
     private var mGoalText: EditText? = null
     private var mMessageText: EditText? = null
+    private var mSpinner: Spinner? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +25,7 @@ class AddHobbyActivity : Activity(){
         mDescriptionText = findViewById<View>(R.id.Description) as EditText
         mGoalText = findViewById<View>(R.id.goalEdit) as EditText
         mMessageText = findViewById<View>(R.id.Message) as EditText
+        mSpinner = findViewById(R.id.spinner)
 
         /////////// onClick for cancel buttons, just finish activity ////////////
         val cancelButton = findViewById<View>(R.id.cancelButton) as Button
@@ -41,7 +43,7 @@ class AddHobbyActivity : Activity(){
             mDescriptionText!!.setText("")
             mGoalText!!.setText("")
             mMessageText!!.setText("")
-            spinner!!.setSelection(0)
+            mSpinner!!.setSelection(0)
         }
 
         /////////// onClick for submit buttons, makes intent and send intent ////////////
@@ -56,7 +58,7 @@ class AddHobbyActivity : Activity(){
                 intent.putExtra(HobbyItem.GOAL, mGoalText!!.text.toString())
                 intent.putExtra(HobbyItem.MESSAGE, mMessageText!!.text.toString())
                 intent.putExtra(HobbyItem.COUNT, "0")
-                intent.putExtra(HobbyItem.COLOR,spinner.selectedItem.toString())
+                intent.putExtra(HobbyItem.COLOR,mSpinner!!.selectedItem.toString())
                 setResult(RESULT_OK, intent)
                 finish()
             } else {
@@ -64,42 +66,19 @@ class AddHobbyActivity : Activity(){
             }
         }
 
-        // Indicates whether spinner was touched by user
-        wasTouched = false
-
-        // Get a reference to the Spinner
-        val spinner = findViewById<Spinner>(R.id.spinner)
-
         // Create an Adapter that holds a list of colors
         val adapter = ArrayAdapter.createFromResource(
                 this, R.array.colors, R.layout.color_picker
         )
 
         // Set the Adapter for the spinner
-        spinner.adapter = adapter
+        mSpinner!!.adapter = adapter
 
         // Set an onTouchListener on the spinner because
         // onItemSelected() can be called multiple times by framework
-        spinner.setOnTouchListener { v: View, _ ->
-            wasTouched = true
+        mSpinner!!.setOnTouchListener { v: View, _ ->
             v.performClick()
             false
-        }
-
-        // Set an onItemSelectedListener on the spinner
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                    parent: AdapterView<*>, view: View,
-                    pos: Int, id: Long
-            ) {
-
-                if (wasTouched) {
-                    wasTouched = false
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
         }
     }
 
@@ -115,6 +94,5 @@ class AddHobbyActivity : Activity(){
 
     companion object {
         private val TAG = "FinalProject"
-        private var wasTouched: Boolean = false
     }
 }

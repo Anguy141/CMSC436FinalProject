@@ -69,8 +69,9 @@
         android:id="@+id/goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Description"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/fakeView"
         android:layout_marginTop="8dp"
         android:text="@string/status_string"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -79,9 +80,9 @@
         android:id="@+id/goalEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/fakeView"
+        android:layout_alignStart="@id/fakeView"
         android:layout_below="@id/goal"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
         android:ems="10"
@@ -90,13 +91,12 @@
 
     </EditText>
 
-    <!-- Priority -->
-
     <TextView
         android:id="@+id/congratulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/fakeView"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/goalEdit"
         android:layout_marginTop="8dp"
         android:text="@string/priority_string"
@@ -107,8 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/congratulation"
-        android:layout_alignEnd="@id/fakeView"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@id/fakeView"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="-1dp"
         android:ems="10"
@@ -116,6 +116,26 @@
         android:inputType="textShortMessage">
 
     </EditText>
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/Description"
+        android:layout_alignEnd="@id/fakeView"
+        android:text="@string/pick_color"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@id/fakeView"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/color" />
 
     <!-- Buttons -->
 
@@ -133,8 +153,8 @@
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="-5dp"
         android:layout_marginEnd="4dp"
         android:text="@string/reset_string" />
@@ -143,10 +163,10 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="107dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginEnd="0dp"
         android:text="@string/submit_string" />
 
 </RelativeLayout>
