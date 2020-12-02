@@ -62,10 +62,8 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
 
     }
 
-
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
-        Log.i(TAG, "Entered getView")
 
         val currItem: HobbyItem = getItem(position) as HobbyItem
         val viewHolder = ViewHolder()
@@ -169,6 +167,6 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
     }
 
     companion object {
-        private val TAG = "FinalProject"
+        private const val TAG = "FinalProject"
     }
 }

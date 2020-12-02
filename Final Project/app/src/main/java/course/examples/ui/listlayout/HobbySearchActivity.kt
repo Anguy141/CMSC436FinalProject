@@ -80,7 +80,7 @@ class HobbySearchActivity : Activity() {
         super.onSaveInstanceState(savedInstanceState)
     }
 
-    fun Activity.hideKeyboard() {
+    private fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(searchBar.windowToken, 0);
     }
@@ -108,6 +108,6 @@ class HobbySearchActivity : Activity() {
     }
 
     companion object {
-        private val MENU_SWITCH = Menu.FIRST
+        private const val MENU_SWITCH = Menu.FIRST
     }
 }

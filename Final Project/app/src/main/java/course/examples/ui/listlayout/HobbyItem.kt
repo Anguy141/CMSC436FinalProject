@@ -39,19 +39,19 @@ class HobbyItem {
     fun toLog(): String {
         return ("hobby:" + hobby + ITEM_SEP + "description:" + description
                 + ITEM_SEP + "message:" + message + ITEM_SEP + "goal:"
-                + goal + ITEM_SEP + "count:" + count + "color:" + color +"\n")
+                + goal + ITEM_SEP + "count:" + count + ITEM_SEP + "color:" + color +"\n")
     }
 
     companion object {
 
-        val ITEM_SEP = System.getProperty("line.separator")
+        val ITEM_SEP: String = System.getProperty("line.separator")
 
-        val HOBBY = "hobby"
-        val DESCRIPTION = "description"
-        val MESSAGE = "message"
-        val GOAL = "goal"
-        val COUNT = "count"
-        val COLOR = "color"
+        const val HOBBY = "hobby"
+        const val DESCRIPTION = "description"
+        const val MESSAGE = "message"
+        const val GOAL = "goal"
+        const val COUNT = "count"
+        const val COLOR = "color"
 
     }
 }

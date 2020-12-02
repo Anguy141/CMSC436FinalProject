@@ -93,6 +93,6 @@ class AddHobbyActivity : Activity(){
     }
 
     companion object {
-        private val TAG = "FinalProject"
+        private const val TAG = "FinalProject"
     }
 }

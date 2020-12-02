@@ -11,7 +11,7 @@ import java.io.*
 import java.text.ParseException
 
 class HobbyManagerActivity : ListActivity() {
-    internal lateinit var mAdapter: HobbyListAdapter
+    private lateinit var mAdapter: HobbyListAdapter
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "Entered onCreate()")
@@ -165,12 +165,12 @@ class HobbyManagerActivity : ListActivity() {
 
     companion object {
 
-        private val ADD_HOBBY_ITEM_REQUEST = 0
-        private val FILE_NAME = "HobbyManagerActivityData.txt"
-        private val TAG = "Final Project"
+        private const val ADD_HOBBY_ITEM_REQUEST = 0
+        private const val FILE_NAME = "HobbyManagerActivityData.txt"
+        private const val TAG = "Final Project"
 
         // IDs for menu items
-        private val MENU_DELETE = Menu.FIRST
-        private val MENU_SWITCH = Menu.FIRST+1
+        private const val MENU_DELETE = Menu.FIRST
+        private const val MENU_SWITCH = Menu.FIRST+1
     }
 }
