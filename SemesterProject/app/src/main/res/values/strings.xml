@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hobby Builder</string>
+    <string name="app_name">Habit/Hobby Tracker</string>
     <string name="priority_string">Congratulation Message</string>
     <string name="add_new_hobby_string">Add New Hobby/Habit</string>
     <string name="title_string">Hobby</string>
