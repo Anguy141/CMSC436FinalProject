@@ -25,7 +25,7 @@
     <string name="increment_string">Increment</string>
     <string name="submit_string">Submit</string>
     <string name="enter_title_string">Enter Habit/Hobby</string>
-    <string name="hobby_manager">Track existing habits/hobbies</string>
+    <string name="hobby_manager">Habits/hobbies manager</string>
     <string name="track_hobby">Click here to track your habits/hobbies</string>
     <string name="search_hobby">Click here to discover new habits/hobbies</string>
     <string name="Progress_string">You have done %1$d/%2$s of your goal!</string>

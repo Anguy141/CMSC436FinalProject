@@ -3,6 +3,7 @@ package course.examples.ui.listlayout
 import android.app.ListActivity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -35,6 +36,7 @@ class HobbyManagerActivity : ListActivity() {
         }
 
         listView.adapter = mAdapter
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
