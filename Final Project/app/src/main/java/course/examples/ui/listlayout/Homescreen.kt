@@ -11,7 +11,8 @@ class Homescreen: Activity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.homescreen)
 
-        var mTracker = findViewById<View>(R.id.tracker) as TextView
+        /////////// onClick to start trackerActivity ////////////
+        val mTracker = findViewById<View>(R.id.tracker) as TextView
         mTracker.setOnClickListener {
             val trackerIntent = Intent(
                     this,
@@ -20,7 +21,8 @@ class Homescreen: Activity()  {
             startActivity(trackerIntent)
         }
 
-        var mSearcher = findViewById<View>(R.id.searcher) as TextView
+        /////////// onClick to start searcherActivity ////////////
+        val mSearcher = findViewById<View>(R.id.searcher) as TextView
         mSearcher.setOnClickListener {
             val searcherIntent = Intent(
                     this,
