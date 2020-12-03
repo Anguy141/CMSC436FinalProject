@@ -11,7 +11,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:text="@string/add_new_hobby_string"
-    android:background="#FFFFFF"
+    android:background="#000000"
     android:textColor="#000AFF"
     android:textSize="24sp">
 </TextView>
