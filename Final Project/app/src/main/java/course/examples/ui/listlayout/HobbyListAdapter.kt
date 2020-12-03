@@ -1,14 +1,10 @@
 package course.examples.ui.listlayout
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import java.util.ArrayList
-
 import android.content.Context
 import android.graphics.Color
-import android.provider.Settings.Global.getString
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +14,7 @@ import kotlinx.android.synthetic.main.hobby_item.view.*
 class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
     private val mItems = ArrayList<HobbyItem>()
 
-    // Add a ToDoItem to the adapter
+    // Add a HobbyItem to the adapter
     // Notify observers that the data set has changed
 
     fun add(item: HobbyItem) {
@@ -37,7 +33,7 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
 
     }
 
-    // Returns the number of ToDoItems
+    // Returns the number of HobbyItem
 
     override fun getCount(): Int {
 
@@ -45,7 +41,7 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
 
     }
 
-    // Retrieve ToDoItems at index pos
+    // Retrieve HobbyItem at index pos
 
     override fun getItem(pos: Int): Any {
 
@@ -53,7 +49,7 @@ class HobbyListAdapter(private val mContext: Context) : BaseAdapter() {
 
     }
 
-    // Get the ID for the ToDoItem
+    // Get the ID for the HobbyItem
     // In this case it's just the position
 
     override fun getItemId(pos: Int): Long {
