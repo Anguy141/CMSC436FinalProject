@@ -2,6 +2,7 @@ package course.examples.ui.listlayout
 
 import android.content.Intent
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class HobbyItem {
     var hobby = String()
     var description = String()
@@ -22,12 +23,12 @@ class HobbyItem {
 
     internal constructor(intent: Intent) {
 
-        hobby = intent.getStringExtra(HobbyItem.HOBBY).toString()
-        description = intent.getStringExtra(HobbyItem.DESCRIPTION).toString()
-        goal = intent.getStringExtra(HobbyItem.GOAL).toString()
-        message = intent.getStringExtra(HobbyItem.MESSAGE).toString()
-        count = intent.getStringExtra(HobbyItem.COUNT).toString()
-        color = intent.getStringExtra(HobbyItem.COLOR).toString()
+        hobby = intent.getStringExtra(HOBBY).toString()
+        description = intent.getStringExtra(DESCRIPTION).toString()
+        goal = intent.getStringExtra(GOAL).toString()
+        message = intent.getStringExtra(MESSAGE).toString()
+        count = intent.getStringExtra(COUNT).toString()
+        color = intent.getStringExtra(COLOR).toString()
 
     }
 

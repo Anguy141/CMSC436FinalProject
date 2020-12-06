@@ -1,9 +1,11 @@
+@file:Suppress("DEPRECATION")
+
 package course.examples.ui.listlayout
 
+import android.annotation.SuppressLint
 import android.app.ListActivity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -14,6 +16,7 @@ import java.text.ParseException
 class HobbyManagerActivity : ListActivity() {
     private lateinit var mAdapter: HobbyListAdapter
 
+    @SuppressLint("InflateParams")
     public override fun onCreate(savedInstanceState: Bundle?) {
         Log.i(TAG, "Entered onCreate()")
         super.onCreate(savedInstanceState)
@@ -98,22 +101,22 @@ class HobbyManagerActivity : ListActivity() {
     }
 
 
-    // Load stored HobbyItems
+    // Load stored HobbyItems, taken from the UILab 4
     private fun loadItems() {
         var reader: BufferedReader? = null
         try {
             val fis = openFileInput(FILE_NAME)
             reader = BufferedReader(InputStreamReader(fis))
 
-            var hobby: String? = null
-            var descriptor: String? = null
-            var goal: String? = null
-            var message: String? = null
-            var count: String? = null
-            var color: String? = null
+            var hobby: String?
+            var descriptor: String?
+            var goal: String?
+            var message: String?
+            var count: String?
+            var color: String?
 
             do {
-                hobby = reader.readLine();
+                hobby = reader.readLine()
                 if (hobby == null)
                     break
                 descriptor = reader.readLine()
@@ -145,7 +148,7 @@ class HobbyManagerActivity : ListActivity() {
         }
     }
 
-    // Save HobbyItems to file
+    // Save HobbyItems to file, taken from the UILab 4
     private fun saveItems() {
         var writer: PrintWriter? = null
         try {

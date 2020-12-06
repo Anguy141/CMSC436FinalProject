@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import kotlinx.android.synthetic.main.add_hobby.*
 
 class AddHobbyActivity : Activity(){
     /////////// EditText Views ////////////
