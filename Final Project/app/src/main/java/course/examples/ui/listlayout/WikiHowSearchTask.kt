@@ -15,6 +15,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
     private val mHandler: Handler = Handler(Looper.getMainLooper())
     private var rawHtml : String? = null
 
+    // Regular Expressions to parse titles and hrefs from WikiHow
     private val titleRegex = Regex("""<div class="result_title">(.*)</div>""")
     private val hrefRegex = Regex("""<a class="result_link" href=(https://www.wikihow.com/.*) >""")
 
@@ -40,7 +41,8 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
         return this
     }
 
-
+    // Web Request is made to WikiHow with search term that is input by the user.
+    // The search results are parsed and the result is a HashMap with the titles of a wikihow webpages as keys, and the hrefs to those webpages as values.
     override fun run() {
         if ( mWikiDataMap == null || hobbyListView == null || hobbyArrayList == null || mWikiToast == null || searchQuery == null ) return
 
@@ -88,6 +90,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
 
             }
 
+            // Map of parsed results returned by WikiHow are updated in the main thread.
             mHandler.post {
                 mWikiDataMap!!.clear()
                 mWikiDataMap!!.putAll(localMap)
@@ -98,7 +101,6 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
 
         }
         else {
-            println("No Data was received from WikiHow!!!")
             mHandler.post {
                 mWikiToast!!.setText("There was an error receiving data from WikiHow.")
                 mWikiToast!!.show()
@@ -107,6 +109,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
 
     }
 
+    // Based off of Lecture Example Code
     private fun httpRequestData(url : String): String? {
         var data: String? = null
         var httpUrlConnection: HttpURLConnection? = null
@@ -131,7 +134,7 @@ class WikiHowSearchTask internal constructor(private val mAppContext: Context) :
         return data
     }
 
-
+    // Based off of Lecture Example Code
     private fun readStream(inputStream: InputStream): String {
         val reader = BufferedReader(InputStreamReader(inputStream))
         val data = StringBuilder()

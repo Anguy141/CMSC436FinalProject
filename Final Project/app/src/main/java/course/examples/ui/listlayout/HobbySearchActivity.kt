@@ -32,6 +32,7 @@ class HobbySearchActivity : Activity() {
         searchBar = findViewById<EditText>(R.id.search)
         val searchButton = findViewById<Button>(R.id.button)
 
+        // Restores values from saved instance state
         hobbyArrayList = ArrayList<String>()
         if (savedInstanceState != null) {
             val savedHobbyList : ArrayList<String> = savedInstanceState.getStringArrayList("HOBBY_LIST") as ArrayList<String>
@@ -80,6 +81,7 @@ class HobbySearchActivity : Activity() {
         super.onSaveInstanceState(savedInstanceState)
     }
 
+    // Hide keyboard snippet from stackoverflow: https://stackoverflow.com/questions/41790357/close-hide-the-android-soft-keyboard-with-kotlin
     private fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(searchBar.windowToken, 0);

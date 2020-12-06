@@ -9,7 +9,8 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-
+// Web View based off of Example Lecture Code
+// Loads WikiHow web page in Web View
 class WikiWebViewActivity : AppCompatActivity() {
 
     private lateinit var mWebView: WebView
